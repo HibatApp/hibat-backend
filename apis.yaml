@@ -1,0 +1,77 @@
+openapi: 3.0.1
+info:
+  title: Hibat App API
+  description: This API is designed for both Web and Mobile app.
+  version: 1.0.0
+
+servers:
+  - url: https://staging.hibatapp.com/api/v1/
+  - url: https://localhost/hibat-app/api/v1/
+
+tags:
+  - name: home
+
+paths:
+  /home:
+    get:
+      tags:
+        - home
+      summary: Get home page data
+      parameters:
+        - name: lang
+          in: query
+          schema:
+            type: string
+            maxLength: 2
+            example: en
+            default: en
+            pattern: ^[a-z]{2}$
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                type: object
+                properties:
+                  sliders:
+                    maxItems: 5
+                    type: array
+                    items:
+                      additionalProperties: false
+                      anyOf:
+                        - $ref: "#/components/schemas/slider"
+
+components:
+  responses:
+    notFound:
+      description: Item not found
+      content:
+        application/json:
+          schema:
+            additionalProperties: false
+            type: object
+            properties:
+              code:
+                type: integer
+                example: 404
+                format: int32
+                maximum: 404
+                minimum: 404
+              message:
+                type: string
+                example: Item not found
+                maxLength: 250
+                pattern: ^[0-9A-Za-z\. ]+$
+
+  schemas:
+    slider:
+      additionalProperties: false
+      type: object
+      properties:
+        picUrl:
+          type: string
+          example: "https://www.domain.com/path/photo.png"
+          pattern: ^[0-9a-z:/\.]+$
+          maxLength: 250
