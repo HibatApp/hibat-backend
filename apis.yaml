@@ -42,6 +42,49 @@ paths:
                       additionalProperties: false
                       anyOf:
                         - $ref: "#/components/schemas/slider"
+  /signin:
+    post:
+      tags:
+        - User
+      description: Signin a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - country_id
+                - mobile
+                - password
+              properties:
+                country_id:
+                  type: integer
+                mobile:
+                  type: string
+                password:
+                  type: string
+              example: # Sample object
+                country_id: 1
+                mobile: "0096123456789"
+                password: "12345678test"
+
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: otpToken (32 letter)
+        '400':
+          description: Missing data
+
+        '401':
+          description: Wrong login info
+
+        '422':
+          description: This account has been disabled
 
 components:
   responses:
