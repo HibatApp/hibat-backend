@@ -42,6 +42,47 @@ paths:
                       additionalProperties: false
                       anyOf:
                         - $ref: "#/components/schemas/slider"
+  
+  /signup:
+    post:
+      description: Signup a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object 
+              required:
+                - full_name
+                - country_id
+                - mobile
+                - password
+              properties:
+                full_name:
+                  type: string
+                country_id:
+                  type: integer
+                mobile:
+                  type: string
+                password:
+                  type: string
+
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: otpToken (32 letter)
+        '400':
+          description: missing data
+        
+        '422':
+          description: mobile number already exists
+        
+        '452':
+          description: this app is not available in this country yet
 
 components:
   responses:
@@ -75,3 +116,6 @@ components:
           example: "https://www.domain.com/path/photo.png"
           pattern: ^[0-9a-z:/\.]+$
           maxLength: 250
+
+
+  
