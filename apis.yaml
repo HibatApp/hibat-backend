@@ -46,7 +46,7 @@ paths:
     post:
       tags:
         - User
-      description: Signin a new user
+      description: Signin a user
       requestBody:
         required: true
         content:
