@@ -14,7 +14,6 @@
 </p>
 <br />
 <br />
-<br />
 
 
 ## About Hibat Platform
@@ -62,7 +61,7 @@ To start you can follow this steps:
   - pick a task from [Trello board](https://trello.com/hibatapp) or one issue on [gitHub issues](https://github.com/HibatApp/hibat-backend/issues)
   - write your code, test, commit and push
   - create a pull request to main Repo, someone should review and approve or give you feedback how to improve your code
-  - 
+
 
 ## License
 
