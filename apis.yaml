@@ -59,20 +59,25 @@ paths:
                 fullName:
                   type: string
                   maxLength: 64
-                  pattern: ^[A-Za-z ]+$
+                  pattern: ^.{1,50}$
+                  example: "John Doe"
                 countryId:
                   type: integer
                   format: int32
                   minimum: 1
+                  maximum: 200
+                  example: 10
                 mobile:
                   type: string
-                  maxLength: 32
-                  pattern: ^[0-9]+$
+                  maxLength: 14
+                  pattern: ^[0-9]{8,14}$
+                  example: "00963999000000"
                 password:
                   type: string
                   minLength: 8
-                  maxLength: 250
-                  pattern: ^[0-9A-Za-z\. ]+$
+                  pattern: ^.{1,50}$
+                  maxLength: 50
+                  example: "Ab@123*/"
               required:
                 - fullName
                 - countryId
@@ -82,13 +87,16 @@ paths:
         200:
           description: Success
           content:
-            text/plain:
+            application/json:
               schema:
-                type: string
-                maxLength: 32
-                minLength: 32
-                pattern: ^[0-9A-Za-z\. ]+$
-                example: otpToken (32 letter)
+                additionalProperties: false
+                type: object
+                properties:
+                  otpToken: 
+                    type: string
+                    pattern: ^[0-9a-z]{32}$
+                    maxLength: 32
+                    example: "CiBjZcsHgsadHPy5mUKB9qRVTIhjXVVT"
         400:
           description: missing data
         422:
