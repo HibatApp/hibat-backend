@@ -47,14 +47,6 @@ paths:
       tags:
         - user
       summary: Get user info
-      parameters:
-        - name: userId
-          in: query
-          schema:
-            type: integer
-            maxLength: 2
-            example: 1
-            default: 0
       responses:
         200:
           description: Successful response
