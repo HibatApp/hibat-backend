@@ -44,6 +44,8 @@ paths:
                         - $ref: "#/components/schemas/slider"
   /user:
     get:
+      security:
+        - bearerAuth: []
       tags:
         - user
       summary: Get user info
