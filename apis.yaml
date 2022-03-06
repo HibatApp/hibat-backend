@@ -42,7 +42,8 @@ paths:
                       additionalProperties: false
                       anyOf:
                         - $ref: "#/components/schemas/slider"
-  /delete:
+
+  /api/delete/{id}:
     delete:
       summary: "Deletes a pet"
       description: "Delete from Wishlist"
