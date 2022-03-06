@@ -43,6 +43,7 @@ This project is made to build a p2p charity platform to give away the extra or n
  - Boards
    - [Design tasks](https://trello.com/b/5kVdKkRu/hibat-backend)
    - [Backend tasks](https://trello.com/b/meDFoyZr/hibat-design)
+   - [DevOps tasks](https://trello.com/b/0Or88rGX/hibat-devops)
  - Documentaions
    - [Project MindMap](https://coggle.it/diagram/YV5X0o8N-09ZyNIG/t/-/e025acfd67834e0ec97792bf97fc095feee1be29d45a34b2af29ce161d30effb)
    - [Project Description](https://docs.google.com/document/d/1VMg3Wb8KCBJfmt14IMkx7FtYDIkq3-QOg5L-Ejh564w/edit?usp=sharing)
