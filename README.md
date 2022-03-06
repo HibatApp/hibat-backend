@@ -63,6 +63,16 @@ To start you can follow this steps:
   - write your code, test, commit and push
   - create a pull request to main Repo, someone should review and approve or give you feedback how to improve your code
 
+## API Spec's contributing guideline
+-   Use [Petstore example](https://editor.swagger.io/) From swagger as reference (convert it to openApi 3 from Edit menu)
+-   Download OpenApi extension for your IDE, ex [OpenAPI (Swagger) Editor](https://marketplace.visualstudio.com/items?itemName=42Crunch.vscode-openapi) which give you: error highlights, auto fixing, live view, security audit and **code score**.
+-   The end point should be POST, GET, PATCH, PUT /user, not /signin /signup /getUserInfo /updateUser
+-   It would be easier for Frontend developers if we used **requestBody** content as `application/x-www-form-urlencoded` instead of `application/json`, you can then test it using form inputs
+-   please use camelCase, like fullName instead of full_name, as in [Petstore example](https://editor.swagger.io/)
+-   please add the main details about properties, like maxlength or pattern, depending on property type, in vs code you can use CTL + . to quick fix it, you need openApi extension to be installed first
+-   it would be better to use 400 instead of "400" for http response code
+-   after finish, try to format the code (Alt+Shift+f in vscode)
+-   before submit your pull request, make an audit test, using the openApi extension (click on purple icon to the top right), keep the code score over 50 out of 100 😊
 
 ## License
 
