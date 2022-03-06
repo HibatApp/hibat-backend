@@ -43,6 +43,35 @@ paths:
                       anyOf:
                         - $ref: "#/components/schemas/slider"
   /user:
+    put:
+      security:
+        - bearerAuth: []
+      tags:
+        - user
+      summary: Update user info
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - fullName
+              properties:
+                fullName:
+                  type: string
+                  maxLength: 50
+                  pattern: ^.{3,50}$
+              example:
+                fullName: "John Doe"
+              additionalProperties: false
+      responses:
+        200:
+          description: Success
+        400:
+          description: Missing data
+        401:
+          description: This request need's a valid user token          
     get:
       security:
         - bearerAuth: []
