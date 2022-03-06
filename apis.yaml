@@ -89,7 +89,7 @@ paths:
           description: Wrong login info
     patch:
       tags:
-        - User
+        - user
       description: Signin a user
       requestBody:
         required: true
