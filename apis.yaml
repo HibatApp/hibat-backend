@@ -42,19 +42,21 @@ paths:
                       additionalProperties: false
                       anyOf:
                         - $ref: "#/components/schemas/slider"
-
   /user:
-    post:
+    put:
+      security:
+        - bearerAuth: []
       tags:
         - user
-      summary: User sign up
-      operationId: userSingUp
+      summary: Update user info
       requestBody:
         required: true
         content:
-          "application/x-www-form-urlencoded":
+          application/x-www-form-urlencoded:
             schema:
               type: object
+              required:
+                - fullName
               properties:
                 fullName:
                   type: string
@@ -83,9 +85,27 @@ paths:
                 - countryId
                 - mobile
                 - password
+                  maxLength: 50
+                  pattern: ^.{3,50}$
+              example:
+                fullName: "John Doe"
+              additionalProperties: false
       responses:
         200:
           description: Success
+        400:
+          description: Missing data
+        401:
+          description: This request need's a valid user token          
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - user
+      summary: Get user info
+      responses:
+        200:
+          description: Successful response
           content:
             application/json:
               schema:
@@ -103,6 +123,9 @@ paths:
           description: mobile number already exists
         452:
           description: this app is not available in this country yet
+                type: object
+        401:
+          description: Wrong login info
 
 components:
   responses:
@@ -136,3 +159,8 @@ components:
           example: "https://www.domain.com/path/photo.png"
           pattern: ^[0-9a-z:/\.]+$
           maxLength: 250
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
