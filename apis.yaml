@@ -43,30 +43,23 @@ paths:
                       anyOf:
                         - $ref: "#/components/schemas/slider"
   /delete:
-    get:
-      tags:
-        - User
-      description: Delete from Wishlist
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - id
-              properties:
-                id:
-                  type: integer
-              example: # deltel
-                id: 1
+    delete:
+      summary: "Deletes a pet"
+      description: "Delete from Wishlist"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          description: "Pet id to delete"
+          schema:
+            type: "integer"
       responses:
-        '200':
-          description: Success
-        '400':
-          description: This request need's a valid user token
-        '404':
-          description: No such item
+        "200":
+          description: "success"
+        "401":
+          description: "This request need's a valid user token"
+        "404":
+          description: "No such item"
 
 components:
   responses:
