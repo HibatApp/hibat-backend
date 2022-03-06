@@ -42,6 +42,31 @@ paths:
                       additionalProperties: false
                       anyOf:
                         - $ref: "#/components/schemas/slider"
+  /delete:
+    get:
+      tags:
+        - User
+      description: Delete from Wishlist
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+              properties:
+                id:
+                  type: integer
+              example: # deltel
+                id: 1
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: This request need's a valid user token
+        '404':
+          description: No such item
 
 components:
   responses:
@@ -75,3 +100,5 @@ components:
           example: "https://www.domain.com/path/photo.png"
           pattern: ^[0-9a-z:/\.]+$
           maxLength: 250
+
+
