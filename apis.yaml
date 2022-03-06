@@ -68,14 +68,26 @@ paths:
       responses:
         200:
           description: Success
+        400:
+          description: Missing data
+        401:
+          description: This request need's a valid user token          
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - user
+      summary: Get user info
+      responses:
+        200:
+          description: Successful response
           content:
             application/json:
               schema:
                 type: object
-        400:
-          description: Missing data
         401:
-          description: This request need's a valid user token
+          description: Wrong login info
+
 components:
   responses:
     notFound:
@@ -108,3 +120,8 @@ components:
           example: "https://www.domain.com/path/photo.png"
           pattern: ^[0-9a-z:/\.]+$
           maxLength: 250
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
