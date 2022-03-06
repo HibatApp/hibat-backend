@@ -75,3 +75,8 @@ components:
           example: "https://www.domain.com/path/photo.png"
           pattern: ^[0-9a-z:/\.]+$
           maxLength: 250
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
