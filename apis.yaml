@@ -42,6 +42,34 @@ paths:
                       additionalProperties: false
                       anyOf:
                         - $ref: "#/components/schemas/slider"
+  /user:
+    put:
+      tags:
+        - user
+      summary: Update user info
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - fullName
+              properties:
+                fullName:
+                  type: string
+                  maxLength: 50
+              example: # Sample object
+                fullName: "John Doe"
+      responses:
+        200:
+          description: success
+          content:
+            application/x-www-form-urlencoded:
+              schema:
+                type: object
+        400:
+          description: missing data
 
 components:
   responses:
