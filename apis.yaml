@@ -42,6 +42,111 @@ paths:
                       additionalProperties: false
                       anyOf:
                         - $ref: "#/components/schemas/slider"
+  /user:
+    put:
+      security:
+        - bearerAuth: []
+      tags:
+        - user
+      summary: Update user info
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - fullName
+              properties:
+                fullName:
+                  type: string
+                  maxLength: 50
+                  pattern: ^.{3,50}$
+              example:
+                fullName: "John Doe"
+              additionalProperties: false
+      responses:
+        200:
+          description: Success
+        400:
+          description: Missing data
+        401:
+          description: This request need's a valid user token          
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - user
+      summary: Get user info
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        401:
+          description: Wrong login info
+    post:
+      tags:
+        - user
+      summary: User sign up
+      operationId: userSingUp
+      requestBody:
+        required: true
+        content:
+          "application/x-www-form-urlencoded":
+            schema:
+              additionalProperties: false
+              type: object
+              properties:
+                fullName:
+                  type: string
+                  maxLength: 50
+                  pattern: ^.{1,50}$
+                  example: John Doe
+                countryId:
+                  type: integer
+                  format: int32
+                  minimum: 1
+                  maximum: 200
+                  example: 10
+                mobile:
+                  type: string
+                  maxLength: 14
+                  pattern: ^[0-9]{8,14}$
+                  example: "00111222000000"
+                password:
+                  type: string
+                  minLength: 8
+                  maxLength: 50
+                  pattern: ^.{8,50}$
+                  example: "Ab@123*/"
+              required:
+                - fullName
+                - countryId
+                - mobile
+                - password
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                type: object
+                properties:
+                  otpToken: 
+                    type: string
+                    pattern: ^[0-9a-z]{32}$
+                    maxLength: 32
+                    example: "a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1"
+        400:
+          description: missing data
+        422:
+          description: mobile number already exists
+        452:
+          description: this app is not available in this country yet
 
   /wishlist/{productId}:
     delete:
@@ -49,7 +154,7 @@ paths:
         - bearerAuth: []
       tags:
         - wishlist
-      summary: Deletes a pet
+      summary: Deletes a from Wishlist
       description: "Delete from Wishlist"
       parameters:
         - name: "productId"
@@ -61,12 +166,12 @@ paths:
             minimum: 0
             format: int32
       responses:
-          "200":
-            description: "success"
-          "401":
-            description: "This request need's a valid user token"
-          "404":
-            description: "No such item"
+        "200":
+          description: "success"
+        "401":
+          description: "This request need's a valid user token"
+        "404":
+          description: "No such item"
 components:
   responses:
     notFound:
@@ -101,3 +206,7 @@ components:
           maxLength: 250
 
 
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
