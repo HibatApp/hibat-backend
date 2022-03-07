@@ -87,6 +87,66 @@ paths:
                 type: object
         401:
           description: Wrong login info
+    post:
+      tags:
+        - user
+      summary: User sign up
+      operationId: userSingUp
+      requestBody:
+        required: true
+        content:
+          "application/x-www-form-urlencoded":
+            schema:
+              additionalProperties: false
+              type: object
+              properties:
+                fullName:
+                  type: string
+                  maxLength: 50
+                  pattern: ^.{1,50}$
+                  example: John Doe
+                countryId:
+                  type: integer
+                  format: int32
+                  minimum: 1
+                  maximum: 200
+                  example: 10
+                mobile:
+                  type: string
+                  maxLength: 14
+                  pattern: ^[0-9]{8,14}$
+                  example: "00111222000000"
+                password:
+                  type: string
+                  minLength: 8
+                  maxLength: 50
+                  pattern: ^.{8,50}$
+                  example: "Ab@123*/"
+              required:
+                - fullName
+                - countryId
+                - mobile
+                - password
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                type: object
+                properties:
+                  otpToken:
+                    type: string
+                    pattern: ^[0-9a-z]{32}$
+                    maxLength: 32
+                    example: "a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1"
+        400:
+          description: missing data
+        422:
+          description: mobile number already exists
+        452:
+          description: this app is not available in this country yet
     patch:
       tags:
         - user
@@ -145,6 +205,30 @@ paths:
         422:
           description: This account has been disabled
 
+  /wishlist/{productId}:
+    delete:
+      security:
+        - bearerAuth: []
+      tags:
+        - wishlist
+      summary: Deletes a from Wishlist
+      description: "Delete from Wishlist"
+      parameters:
+        - name: "productId"
+          in: path
+          required: true
+          schema:
+            type: integer
+            maximum: 999999
+            minimum: 0
+            format: int32
+      responses:
+        "200":
+          description: "success"
+        "401":
+          description: "This request need's a valid user token"
+        "404":
+          description: "No such item"
 components:
   responses:
     notFound:
@@ -177,6 +261,7 @@ components:
           example: "https://www.domain.com/path/photo.png"
           pattern: ^[0-9a-z:/\.]+$
           maxLength: 250
+
 
   securitySchemes:
     bearerAuth:
