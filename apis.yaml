@@ -88,6 +88,59 @@ paths:
         401:
           description: Wrong login info
 
+  /user:
+    post:
+      tags:
+        - user
+      summary: User sign up
+      operationId: userSingUp
+      requestBody:
+        required: true
+        content:
+          "application/x-www-form-urlencoded":
+            schema:
+              type: object
+              properties:
+                fullName:
+                  type: string
+                  maxLength: 64
+                  pattern: ^[A-Za-z ]+$
+                countryId:
+                  type: integer
+                  format: int32
+                  minimum: 1
+                mobile:
+                  type: string
+                  maxLength: 32
+                  pattern: ^[0-9]+$
+                password:
+                  type: string
+                  minLength: 8
+                  maxLength: 250
+                  pattern: ^[0-9A-Za-z\. ]+$
+              required:
+                - fullName
+                - countryId
+                - mobile
+                - password
+      responses:
+        200:
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+                maxLength: 32
+                minLength: 32
+                pattern: ^[0-9A-Za-z\. ]+$
+                example: otpToken (32 letter)
+        400:
+          description: missing data
+        422:
+          description: mobile number already exists
+        452:
+          description: this app is not available in this country yet
+
 components:
   responses:
     notFound:
