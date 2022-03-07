@@ -148,6 +148,30 @@ paths:
         452:
           description: this app is not available in this country yet
 
+  /wishlist/{productId}:
+    delete:
+      security:
+        - bearerAuth: []
+      tags:
+        - wishlist
+      summary: Deletes a from Wishlist
+      description: "Delete from Wishlist"
+      parameters:
+        - name: "productId"
+          in: path
+          required: true
+          schema:
+            type: integer
+            maximum: 999999
+            minimum: 0
+            format: int32
+      responses:
+        "200":
+          description: "success"
+        "401":
+          description: "This request need's a valid user token"
+        "404":
+          description: "No such item"
 components:
   responses:
     notFound:
@@ -180,6 +204,7 @@ components:
           example: "https://www.domain.com/path/photo.png"
           pattern: ^[0-9a-z:/\.]+$
           maxLength: 250
+
 
   securitySchemes:
     bearerAuth:
