@@ -97,6 +97,7 @@ paths:
           application/x-www-form-urlencoded:
             schema:
               type: object
+              additionalProperties: false
               required:
                 - countryId
                 - mobile
@@ -116,7 +117,7 @@ paths:
                   type: string
                   minLength: 8
                   maxLength: 250
-                  pattern: ^.{1,50}$
+                  pattern: ^.{8,50}$
               example:
                 countryId: 1
                 mobile: "096123456789"
@@ -129,8 +130,10 @@ paths:
             application/json:
               schema:
                 type: object
+                additionalProperties: false
                 properties:
-                  otpToken:
+                  token:
+                    maxLength: 32
                     type: string
                     pattern: ^[0-9a-z]{32}$
         400:
