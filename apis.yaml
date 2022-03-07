@@ -43,17 +43,20 @@ paths:
                       anyOf:
                         - $ref: "#/components/schemas/slider"
 
-  /api/delete/{id}:
+  /wishlist/{productId}:
     delete:
       summary: "Deletes a pet"
       description: "Delete from Wishlist"
       parameters:
-        - name: "id"
+        - name: "productId"
           in: "path"
           required: true
-          description: "Pet id to delete"
+          description: "Pet productId to delete"
           schema:
             type: "integer"
+            maximum: 999999
+            minimum: 0
+            format: int32
       responses:
         "200":
           description: "success"
