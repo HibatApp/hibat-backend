@@ -45,26 +45,28 @@ paths:
 
   /wishlist/{productId}:
     delete:
-      summary: "Deletes a pet"
+      security:
+        - bearerAuth: []
+      tags:
+        - wishlist
+      summary: Deletes a pet
       description: "Delete from Wishlist"
       parameters:
         - name: "productId"
-          in: "path"
+          in: path
           required: true
-          description: "Pet productId to delete"
           schema:
-            type: "integer"
+            type: integer
             maximum: 999999
             minimum: 0
             format: int32
       responses:
-        "200":
-          description: "success"
-        "401":
-          description: "This request need's a valid user token"
-        "404":
-          description: "No such item"
-
+          "200":
+            description: "success"
+          "401":
+            description: "This request need's a valid user token"
+          "404":
+            description: "No such item"
 components:
   responses:
     notFound:
