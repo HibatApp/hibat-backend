@@ -262,6 +262,22 @@ components:
           example: "https://www.domain.com/path/photo.png"
           pattern: ^[0-9a-z:/\.]+$
           maxLength: 250
+    User:
+      additionalProperties: false
+      type: object
+      properties:
+        fullName:
+          type: string
+        email:
+          type: string
+          format: email
+        countryId:
+          type: integer
+          format: int32
+        mobile:
+          type: string
+        token:
+          type: string
 
 
   securitySchemes:
