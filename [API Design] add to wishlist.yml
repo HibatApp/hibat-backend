@@ -1,6 +1,7 @@
 additionalProperties: false
 anyOf:
   - $ref: "#/components/schemas/slider"
+  
 /addTo Wishlist:
   put:
     tags:
