@@ -205,8 +205,53 @@ components:
           pattern: ^[0-9a-z:/\.]+$
           maxLength: 250
 
-
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
+
+/addToWishlist:
+  put:
+    tags:
+    - user
+    summary: Add to wishlist
+    description: "Add to wishlist"
+    responses:
+      200:
+        description: success
+      401:
+        description: this request need's a valid user token
+      404:
+        description: no such item
+  components:
+    responses:
+      notFound:
+        description: Item not found
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              type: object
+              properties:
+                code:
+                  type: integer
+                  example: 404
+                  format: int32
+                  maximum: 404
+                  minimum: 404
+                message:
+                  type: string
+                  example: Item not found
+                  maxLength: 250
+                  pattern: ^[0-9A-Za-z\. ]+$
+
+      schemes:
+        slider:
+          additionalProperties: false
+          type: object
+          properties:
+            picUrl:
+              type: string
+              example: ""
+              pattern: ^[0-9a-z:/\. ]+$
+              maxLength: 250
