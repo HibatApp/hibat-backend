@@ -73,6 +73,14 @@ To start you can follow this steps:
 -   after finish, try to format the code (Alt+Shift+f in vscode)
 -   before submit your pull request, make an audit test, using the openApi extension (click on purple icon to the top right), keep the code score over 50 out of 100 😊
 
+## Contributors
+
+This project exists thanks to all the people who contribute.
+
+<a href="https://github.com/HibatApp/hibat-backend/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=HibatApp/hibat-backend" />
+</a>
+
 ## License
 
 Hibat Platform is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
