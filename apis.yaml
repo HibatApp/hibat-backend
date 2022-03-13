@@ -262,7 +262,64 @@ components:
           example: "https://www.domain.com/path/photo.png"
           pattern: ^[0-9a-z:/\.]+$
           maxLength: 250
-
+    user:
+      type: object
+    category:
+      type: object
+    location:
+      type: object
+    product:
+      additionalProperties: false
+      type: object
+      properties:
+        title:
+          type: string
+          example: "This is product title."
+          pattern: /^[a-zA-Z0-9\ \']+$/
+          maxLength: 250
+        details:
+          type: string
+          example: "These is product description text."
+          pattern: /^[a-zA-Z0-9\ \']+$/
+          maxLength: 300
+        mainPhoto:
+          type: string
+          example: "https://www.domain.com/path/photo.png"
+          pattern: ^[0-9a-z:/\.]+$
+          maxLength: 250
+        categoryId:
+          $ref: "#/components/schemas/category"
+        ownerId:
+          $ref: "#/components/schemas/user"
+        areaId:
+          $ref: "#/components/schemas/location"
+        tags:
+          type: array
+          items:
+            type: string
+            example: "electronics"
+            pattern: /^[a-zA-Z']+$/
+            maxLength: 8
+        views:
+          type: integer
+          example: 102
+          pattern: /^[0-9]+$/
+          maxLength: 8
+        status:
+          type: integer
+          example: 2
+          pattern: /^[0-9]+$/
+          maxLength: 4
+        createdAt:
+          type: string
+          example: "2022-03-13T13:24:26+00:00"
+          pattern: /[0-9]{4}/(0[1-9]|1[0-2])/(0[1-9]|[1-2][0-9]|3[0-1]):(2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9]/
+          maxLength: 25
+        updatedAt:
+          type: string
+          example: "2022-03-13T13:24:26+00:00"
+          pattern: /[0-9]{4}/(0[1-9]|1[0-2])/(0[1-9]|[1-2][0-9]|3[0-1]):(2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9]/
+          maxLength: 25
 
   securitySchemes:
     bearerAuth:
