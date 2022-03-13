@@ -205,8 +205,30 @@ paths:
 
         422:
           description: This account has been disabled
-
   /wishlist/{productId}:
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - wishlist
+      summary: Add to Wishlist
+      description: Add product to the wishlist
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          schema:
+            type: integer
+            maximum: 999999
+            minimum: 0
+            format: int32
+      responses:
+        "200":
+          description: "success"
+        "401":
+          description: "This request needs a valid user token"
+        "404":
+          description: "This product does not exist or not available"
     delete:
       security:
         - bearerAuth: []
@@ -290,7 +312,6 @@ components:
           type: string
           pattern: ^[0-9a-z]{32}$
           maxLength: 32
-
 
   securitySchemes:
     bearerAuth:
