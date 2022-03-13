@@ -262,13 +262,39 @@ components:
           example: "https://www.domain.com/path/photo.png"
           pattern: ^[0-9a-z:/\.]+$
           maxLength: 250
-    user:
+    Category:
       type: object
-    category:
+    Location:
       type: object
-    location:
+    User:
+      additionalProperties: false
       type: object
-    product:
+      properties:
+        fullName:
+          type: string
+          maxLength: 50
+          pattern: ^.{3,50}$
+          example: John Doe
+        email:
+          type: string
+          format: email
+          example: example@example.com
+        countryId:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 200
+          example: 10
+        mobile:
+          type: string
+          minLength: 8
+          maxLength: 32
+          pattern: ^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$
+        token:
+          type: string
+          pattern: ^[0-9a-z]{32}$
+          maxLength: 32
+    Product:
       additionalProperties: false
       type: object
       properties:
@@ -288,11 +314,11 @@ components:
           pattern: ^[0-9a-z:/\.]+$
           maxLength: 250
         categoryId:
-          $ref: "#/components/schemas/category"
+          $ref: "#/components/schemas/Category"
         ownerId:
-          $ref: "#/components/schemas/user"
+          $ref: "#/components/schemas/User"
         areaId:
-          $ref: "#/components/schemas/location"
+          $ref: "#/components/schemas/Location"
         tags:
           type: array
           items:
@@ -320,6 +346,7 @@ components:
           example: "2022-03-13T13:24:26+00:00"
           pattern: /[0-9]{4}/(0[1-9]|1[0-2])/(0[1-9]|[1-2][0-9]|3[0-1]):(2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9]/
           maxLength: 25
+
 
   securitySchemes:
     bearerAuth:
