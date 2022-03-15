@@ -262,10 +262,6 @@ components:
           example: "https://www.domain.com/path/photo.png"
           pattern: ^[0-9a-z:/\.]+$
           maxLength: 250
-    Category:
-      type: object
-    Location:
-      type: object
     User:
       additionalProperties: false
       type: object
@@ -301,12 +297,12 @@ components:
         title:
           type: string
           example: "This is product title."
-          pattern: /^[a-zA-Z0-9\ \']+$/
+          pattern: /^.{0,200}$/
           maxLength: 250
         details:
           type: string
           example: "These is product description text."
-          pattern: /^[a-zA-Z0-9\ \']+$/
+          pattern: /^.{0,200}$/
           maxLength: 300
         mainPhoto:
           type: string
@@ -314,28 +310,43 @@ components:
           pattern: ^[0-9a-z:/\.]+$
           maxLength: 250
         categoryId:
-          $ref: "#/components/schemas/Category"
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 99999
+          example: 75123
         ownerId:
-          $ref: "#/components/schemas/User"
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 99999
+          example: 90910
         areaId:
-          $ref: "#/components/schemas/Location"
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 99999
+          example: 99010
         tags:
           type: array
+          maxItems: 99999
           items:
             type: string
             example: "electronics"
-            pattern: /^[a-zA-Z']+$/
+            pattern: /^.{0,200}$/
             maxLength: 8
         views:
           type: integer
+          format: int32
           example: 102
-          pattern: /^[0-9]+$/
-          maxLength: 8
+          minimum: 0
+          maximum: 99999
         status:
           type: integer
+          format: int32
           example: 2
-          pattern: /^[0-9]+$/
-          maxLength: 4
+          minimum: 0
+          maximum: 99999
         createdAt:
           type: string
           example: "2022-03-13T13:24:26+00:00"
