@@ -230,6 +230,32 @@ paths:
           description: "This request need's a valid user token"
         "404":
           description: "No such item"
+  /requests/{requestId}:
+    get:
+      tags:
+        - request
+      summary: Find request by ID
+      description: Returns a single request
+      operationId: getRequestById
+      parameters:
+        - name: requestId
+          in: path
+          description: ID of request to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Request"
+        401:
+          description: This request need a valid user token
+        404:
+          description: No such item          
 components:
   responses:
     notFound:
