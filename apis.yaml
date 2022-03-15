@@ -274,6 +274,7 @@ components:
         email:
           type: string
           format: email
+          maxLength: 100
           example: example@example.com
         countryId:
           type: integer
