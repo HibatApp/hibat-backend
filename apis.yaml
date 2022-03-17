@@ -87,7 +87,6 @@ paths:
                 type: object
         401:
           description: Wrong login info
-  /user/sinUp:
     post:
       tags:
         - user
@@ -148,8 +147,7 @@ paths:
           description: mobile number already exists
         452:
           description: this app is not available in this country yet
-  /user/sinIn:
-    post:
+    patch:
       tags:
         - user
       description: Signin a user
