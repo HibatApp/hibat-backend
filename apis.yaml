@@ -222,9 +222,10 @@ paths:
             type: integer
             minimum: 0
             format: int32
-        - name: "pageLimit"
+            example: 3
+        - name: "page"
           in: query
-          description: the amount of Products returned
+          description: the amount of Products returned in page
           required: false
           schema:
             type: integer
@@ -232,7 +233,8 @@ paths:
             minimum: 1
             default: 10
             format: int32
-        - name: "page"
+            example: 20
+        - name: "pageLimit"
           in: query
           description: the amount of pages returned
           required: false
@@ -242,14 +244,17 @@ paths:
             minimum: 0
             default: 1
             format: int32
+            example: 3
         - name: "sortBy"
           in: query
+          description: sort the Products by them details like the latest ones 
           required: false
           schema:
             type: array
             items:
               type: string
             default: ["-createdAt", "+status"]
+            example : ["+createdAt"]
       responses:
         '200':
           description: "success"
@@ -258,7 +263,8 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/productDetails'
+                  type: object
+                  # $ref: '#/components/productModel'
 
   /wishlist/{productId}:
     delete:
