@@ -205,6 +205,66 @@ paths:
 
         422:
           description: This account has been disabled
+          
+  /store/Products:
+    get:
+      tags:
+      - "store" 
+      summary: "Returns Products"
+      description: "Returns a map of Products"
+      operationId: "getProducts"
+      parameters:
+        - name: "categoryId"
+          in: query
+          description: pass an optional category Id for looking up Products
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+            format: int32
+            example: 3
+        - name: "page"
+          in: query
+          description: the amount of Products returned in page
+          required: false
+          schema:
+            type: integer
+            maximum: 50
+            minimum: 1
+            default: 10
+            format: int32
+            example: 20
+        - name: "pageLimit"
+          in: query
+          description: the amount of pages returned
+          required: false
+          schema:
+            type: integer
+            maximum: 10
+            minimum: 0
+            default: 1
+            format: int32
+            example: 3
+        - name: "sortBy"
+          in: query
+          description: sort the Products by them details like the latest ones 
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+            default: ["-createdAt", "+status"]
+            example : ["+createdAt" , "areaId ='1'"]
+      responses:
+        '200':
+          description: "success"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  # $ref: '#/components/productModel'
 
   /wishlist/{productId}:
     delete:
@@ -296,3 +356,4 @@ components:
     bearerAuth:
       type: http
       scheme: bearer
+      
