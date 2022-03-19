@@ -254,6 +254,34 @@ paths:
           description: This request need a valid user token
         404:
           description: No such item
+
+  /requests/{requestId}:
+    get:
+      tags:
+        - request
+      summary: Find request by ID
+      description: Returns a single request
+      operationId: getRequestById
+      parameters:
+        - name: requestId
+          in: path
+          description: ID of request to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Request"
+        401:
+          description: This request need a valid user token
+        404:
+          description: No such item          
+
 components:
   responses:
     notFound:
@@ -298,6 +326,7 @@ components:
         email:
           type: string
           format: email
+          maxLength: 100
           example: example@example.com
         countryId:
           type: integer
@@ -314,6 +343,73 @@ components:
           type: string
           pattern: ^[0-9a-z]{32}$
           maxLength: 32
+    Product:
+      additionalProperties: false
+      type: object
+      properties:
+        title:
+          type: string
+          example: "This is product title."
+          pattern: /^.{0,200}$/
+          maxLength: 250
+        details:
+          type: string
+          example: "These is product description text."
+          pattern: /^.{0,200}$/
+          maxLength: 300
+        mainPhoto:
+          type: string
+          example: "https://www.domain.com/path/photo.png"
+          pattern: ^[0-9a-z:/\.]+$
+          maxLength: 250
+        categoryId:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 99999
+          example: 75123
+        ownerId:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 99999
+          example: 90910
+        areaId:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 99999
+          example: 99010
+        tags:
+          type: array
+          maxItems: 99999
+          items:
+            type: string
+            example: "electronics"
+            pattern: /^.{0,200}$/
+            maxLength: 8
+        views:
+          type: integer
+          format: int32
+          example: 102
+          minimum: 0
+          maximum: 99999
+        status:
+          type: integer
+          format: int32
+          example: 2
+          minimum: 0
+          maximum: 99999
+        createdAt:
+          type: string
+          example: "2022-03-13T13:24:26+00:00"
+          pattern: /[0-9]{4}/(0[1-9]|1[0-2])/(0[1-9]|[1-2][0-9]|3[0-1]):(2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9]/
+          maxLength: 25
+        updatedAt:
+          type: string
+          example: "2022-03-13T13:24:26+00:00"
+          pattern: /[0-9]{4}/(0[1-9]|1[0-2])/(0[1-9]|[1-2][0-9]|3[0-1]):(2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9]/
+          maxLength: 25
 
 
   securitySchemes:
