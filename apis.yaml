@@ -206,15 +206,15 @@ paths:
         422:
           description: This account has been disabled
           
-  /store/Products:
+  /Products:
     get:
       tags:
-      - "store" 
-      summary: "Returns Products"
-      description: "Returns a map of Products"
-      operationId: "getProducts"
+      - Products 
+      summary: Returns Products
+      description: Returns a map of Products
+      operationId: getProducts
       parameters:
-        - name: "categoryId"
+        - name: categoryId
           in: query
           description: pass an optional category Id for looking up Products
           required: false
@@ -223,7 +223,14 @@ paths:
             minimum: 0
             format: int32
             example: 3
-        - name: "page"
+        - name: q
+          in: query
+          required: false
+          description: 'pass an optional search string for looking up Product'
+          schema:
+            type: string
+            example: bicycle
+        - name: page
           in: query
           description: the amount of Products returned in page
           required: false
@@ -234,34 +241,39 @@ paths:
             default: 10
             format: int32
             example: 20
-        - name: "pageLimit"
+        - name: pageLimit
           in: query
           description: the amount of pages returned
           required: false
           schema:
             type: integer
-            maximum: 10
-            minimum: 0
+            maximum: 100
+            minimum: 1
             default: 1
             format: int32
             example: 3
-        - name: "sortBy"
+        - name: sortby
           in: query
-          description: sort the Products by them details like the latest ones 
           required: false
           schema:
-            type: array
-            items:
-              type: string
-            default: ["-createdAt", "+status"]
-            example : ["+createdAt" , "areaId ='1'"]
+            type: string
+            enum:
+              - alpha
+              - recent
+          description: >
+            sortby order:
+              * alpha - alphabetically, from A to Z.
+              * recent - Descending createdAt, from latest to oldest.          
+          example: recent
+
       responses:
-        '200':
-          description: "success"
+        200:
+          description: success
           content:
             application/json:
               schema:
                 type: array
+                maxItems: 100
                 items:
                   $ref: "#/components/schemas/Product"
 
