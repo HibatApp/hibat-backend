@@ -230,6 +230,31 @@ paths:
           description: "This request need's a valid user token"
         "404":
           description: "No such item"
+
+  /request/{requestId}:
+    delete:
+      security:
+        - bearerAuth: []
+      tags:
+        - request
+      summary: Cancel request for a product
+      parameters:
+        - name: requestId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 0
+            maximum: 999999
+      responses:
+        200:
+          description: Success
+        401:
+          description: This request need a valid user token
+        404:
+          description: No such item
+
   /requests/{requestId}:
     get:
       tags:
@@ -256,6 +281,7 @@ paths:
           description: This request need a valid user token
         404:
           description: No such item          
+
 components:
   responses:
     notFound:
