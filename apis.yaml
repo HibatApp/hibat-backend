@@ -263,8 +263,7 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
-                  # $ref: '#/components/productModel'
+                  $ref: "#/components/schemas/Product"
 
   /wishlist/{productId}:
     delete:
