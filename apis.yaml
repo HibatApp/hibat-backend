@@ -205,6 +205,77 @@ paths:
 
         422:
           description: This account has been disabled
+          
+  /Products:
+    get:
+      tags:
+      - Products 
+      summary: Returns Products
+      description: Returns a map of Products
+      operationId: getProducts
+      parameters:
+        - name: categoryId
+          in: query
+          description: pass an optional category Id for looking up Products
+          required: false
+          schema:
+            type: integer
+            minimum: 0
+            format: int32
+            example: 3
+        - name: q
+          in: query
+          required: false
+          description: 'pass an optional search string for looking up Product'
+          schema:
+            type: string
+            example: bicycle
+        - name: page
+          in: query
+          description: the amount of Products returned in page
+          required: false
+          schema:
+            type: integer
+            maximum: 50
+            minimum: 1
+            default: 10
+            format: int32
+            example: 20
+        - name: pageLimit
+          in: query
+          description: the amount of pages returned
+          required: false
+          schema:
+            type: integer
+            maximum: 100
+            minimum: 1
+            default: 1
+            format: int32
+            example: 3
+        - name: sortby
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - alpha
+              - recent
+          description: >
+            sortby order:
+              * alpha - alphabetically, from A to Z.
+              * recent - Descending createdAt, from latest to oldest.          
+          example: recent
+
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: array
+                maxItems: 100
+                items:
+                  $ref: "#/components/schemas/Product"
 
   /wishlist/{productId}:
     delete:
@@ -416,3 +487,4 @@ components:
     bearerAuth:
       type: http
       scheme: bearer
+      
