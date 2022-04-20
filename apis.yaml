@@ -383,9 +383,6 @@ paths:
         404:
           description: No such item
 
-security:
-  - bearerAuth: []
-
 components:
   responses:
     notFound:
