@@ -304,6 +304,27 @@ paths:
                 $ref: "#/components/schemas/Product"
         404:
           description: No such Product
+  /wishlist:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - wishlist
+      summary: view my Wishlist
+      description: view user Wishlist
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: array
+                maxItems: 100
+                items:
+                  $ref: "#/components/schemas/Product"
+        401:
+          description: This request need a valid user token
+
 
   /wishlist/{productId}:
     delete:
