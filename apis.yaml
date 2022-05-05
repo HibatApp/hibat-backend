@@ -350,6 +350,29 @@ paths:
           description: "This request need's a valid user token"
         "404":
           description: "No such item"
+  
+  /request:
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - request
+      summary: Add request for a product
+      description: request product
+      operationId: requestProduct
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Request"
+      responses:
+        200:
+          description: success
+        401:
+          description: This request need a valid user token
+        404:
+          description: No such item
 
   /request/{requestId}:
     delete:
@@ -395,10 +418,10 @@ paths:
       responses:
         200:
           description: success
-          #content:
-            #application/json:
-              #schema:
-                #$ref: "#/components/schemas/Request"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Request"
         401:
           description: This request need a valid user token
         404:
@@ -532,6 +555,35 @@ components:
           example: "2022-03-13T13:24:26+00:00"
           pattern: /[0-9]{4}/(0[1-9]|1[0-2])/(0[1-9]|[1-2][0-9]|3[0-1]):(2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9]/
           maxLength: 25
+    Request:
+      additionalProperties: false
+      type: object
+      properties:
+        requestId:
+          type: integer
+          format: int32
+          description: Unique ID of the request
+        dateOfRequest:
+          type: string
+          description: request Date of the product
+          example: "2022-03-13T13:24:26+00:00"
+          pattern: /[0-9]{4}/(0[1-9]|1[0-2])/(0[1-9]|[1-2][0-9]|3[0-1]):(2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9]/
+        productId:
+          type: integer
+          format: int32
+          description: Id of a product requested          
+      required:
+      - requestId
+      - dateOfRequest
+      - productId
+      example:
+        requestId: '302'
+        dateOfRequest: '2022-04-23'
+        productId: '101'
+
+
+        
+
 
   securitySchemes:
     bearerAuth:
