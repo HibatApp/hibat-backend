@@ -45,6 +45,7 @@ This project is made to build a p2p charity platform to give away the extra or n
     -   [Project MindMap](https://coggle.it/diagram/YV5X0o8N-09ZyNIG/t/-/e025acfd67834e0ec97792bf97fc095feee1be29d45a34b2af29ce161d30effb)
     -   [Project Description](https://docs.google.com/document/d/1VMg3Wb8KCBJfmt14IMkx7FtYDIkq3-QOg5L-Ejh564w/edit?usp=sharing)
     -   [API Spec's Sheet](http://apidocs.architweb.com/?url=hibat-backend/apis.yaml)
+    -   [Database ERD](https://dbdiagram.io/d/6337f5ea7b3d2034fffebf3b)
 
 ## Who can join the projects
 
